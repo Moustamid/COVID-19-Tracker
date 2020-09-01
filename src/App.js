@@ -9,11 +9,14 @@ import {
   CardContent
 } from "@material-ui/core" ;
 
-import InfoBox from './components/InfoBox';
-import Map from './components/map';
+import InfoBox from './components/infobox/InfoBox';
 import Table from './components/table/Table';
 import {sortData} from './Helper/util';
 import LineGraph from './components/Graph/LineGraph';
+import Map from './components/map/map';
+import "leaflet/dist/leaflet.css";
+
+
 
 
 // USEEFFECT = Runs a piece of code based on a given condition  : 
@@ -28,12 +31,17 @@ function App() {
   const  [country , setContry ] = useState("worldwide") ;
   const  [countryInfo , setContryInfo ] = useState({}) ;
   const  [TableData , setTableData ] = useState([]) ;
+  const  [mapCenter , setMapCenter ] = 
+          useState({ lat: 34.80746 , lng: -40.4796 }) ;
+  const  [mapZoom , setMapZoom ] = useState(3) ;
+  const  [mapCountries , setmapCountries ] = useState([]) ;
+
 
 useEffect( ()=> {
     fetch("https://disease.sh/v3/covid-19/all")
    .then(respense => respense.json())
    .then(data => {
-    setContryInfo(data);
+      setContryInfo(data);
    });
 
 } , [] );  
@@ -54,6 +62,8 @@ useEffect( ()=>{
        const  sortedData = sortData(data);
        setTableData(sortedData);
        setCountries(countries);
+       setmapCountries(data);
+       console.log('setmapCountries' ,data )
 
     });
 
@@ -79,8 +89,8 @@ const onCountryChange = async e => {
         .then( data => {
           setContry(countryCode);
           setContryInfo(data);
-          console.log(countryCode);
-          console.log(data);
+          setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
+          setMapZoom(4);
         });
 };
 
@@ -114,7 +124,7 @@ const onCountryChange = async e => {
       </div>
 
       {/* map */}
-        <Map/>
+        <Map countries={mapCountries} center={mapCenter} zoom={mapZoom} />
       </div>
        <Card className="app__right">
          <CardContent>

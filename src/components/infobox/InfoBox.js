@@ -1,4 +1,5 @@
 import React from 'react';
+import './infoBox.css';
 
 import { 
   Card ,
@@ -14,11 +15,13 @@ function InfoBox({title , cases , total}) {
           {title}
         </Typography>
 
-        <h2 className="infoBox__cases">{cases}</h2>
-        
         <Typography className="infoBox__total" color="textSecondary">
-          {total} Total
+        Total : {total} 
         </Typography>
+
+
+        <h2 className="infoBox__cases"><span className='infoBox__today'>today : </span>{cases}</h2>
+        
 
       </CardContent>
     </Card>

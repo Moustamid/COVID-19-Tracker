@@ -79,7 +79,7 @@ const options = {
  
 // ****************** LineGraph Main Function : 
 
-function LineGraph() {
+function LineGraph({casesType = 'cases'}) {
 
   //  *********** States :
 
@@ -95,7 +95,7 @@ function LineGraph() {
         .then(data => {
 
           console.log(data);
-          let chartData   = buildChartData(data , "cases");
+          let chartData   = buildChartData(data , casesType);
 
           console.log(chartData);    
           setData(chartData);   
@@ -104,14 +104,16 @@ function LineGraph() {
      
      fetchData();
 
-  } , []);
+  } , [casesType]);
 
   // *************** LineGraph returns : 
 
   return (
     <div >
-      <h1>I am a Graph 2</h1>
-      {/* Check if data exist */}
+      <h1>I am a Graph </h1>
+      {/* Check if data exist :  
+         data?.length > 0 &&  , or data && data.lenght */}
+
       { data?.length > 0 && (
         <Line 
           options= {options}
