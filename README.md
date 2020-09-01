@@ -2,7 +2,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Live Deme on FireBase : https://covide-19-tracker-c0c1f.web.app/
 
-![]();
+![](covid19app.PNG)
 
 ## Available Scripts
 
