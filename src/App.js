@@ -35,6 +35,7 @@ function App() {
           useState({ lat: 34.80746 , lng: -40.4796 }) ;
   const  [mapZoom , setMapZoom ] = useState(3) ;
   const  [mapCountries , setmapCountries ] = useState([]) ;
+  const [casesType, setCasesType] = useState("cases");
 
 
 useEffect( ()=> {
@@ -117,26 +118,42 @@ const onCountryChange = async e => {
   
 
       <div className="app__stats">
-      <InfoBox title="Coronavirus Cases" 
+
+      <InfoBox isRed
+               active={casesType === "cases"}
+               title="Coronavirus Cases" 
                cases={prettyPrintStat(countryInfo.todayCases)} 
-               total={countryInfo.cases} />
-      <InfoBox title="Recovered" 
+               total={countryInfo.cases}
+               onClick={e => setCasesType('cases') }
+                />
+      <InfoBox active={casesType === "recovered"}
+               title="Recovered" 
                cases={prettyPrintStat(countryInfo.todayRecovered)} 
-               total={countryInfo.recovered} />
-      <InfoBox title="Deaths"
+               total={countryInfo.recovered}
+               onClick={e => setCasesType('recovered') }
+                />
+      <InfoBox isRed
+               active={casesType === "deaths"}
+               title="Deaths"
                cases={prettyPrintStat(countryInfo.todayDeaths)} 
-               total={countryInfo.deaths} />
+               total={countryInfo.deaths}
+               onClick={e => setCasesType('deaths') }
+                />
       </div>
 
       {/* map */}
-        <Map countries={mapCountries} center={mapCenter} zoom={mapZoom} />
+        <Map 
+        casesType={casesType} 
+        countries={mapCountries} 
+        center={mapCenter} 
+        zoom={mapZoom} />
       </div>
        <Card className="app__right">
          <CardContent>
            <h3>Live Cases by Country</h3>
            <Table countries={TableData} />
-           <h3>Wordwide new cases</h3> 
-            <LineGraph />
+           <h3 className="app__right__Graph" >Wordwide new {casesType}</h3> 
+            <LineGraph casesType={casesType} />
          </CardContent>
        </Card>
     </div>

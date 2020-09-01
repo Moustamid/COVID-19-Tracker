@@ -110,7 +110,6 @@ function LineGraph({casesType = 'cases'}) {
 
   return (
     <div >
-      <h1>I am a Graph </h1>
       {/* Check if data exist :  
          data?.length > 0 &&  , or data && data.lenght */}
 

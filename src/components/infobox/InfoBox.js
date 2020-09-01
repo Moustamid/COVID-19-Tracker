@@ -7,9 +7,11 @@ import {
   Typography
 } from "@material-ui/core" ;
 
-function InfoBox({title , cases , total}) {
+function InfoBox({title , cases , total , active , isRed , ...props}) {
   return (
-    <Card className="infoBox">
+    <Card onClick={props.onClick} 
+          className={`infoBox  ${active && "infoBox--selected"} 
+                               ${isRed && "infoBox--red" } `} >
       <CardContent>
         <Typography className="infoBox__title" color="textSecondary">
           {title}
@@ -20,7 +22,10 @@ function InfoBox({title , cases , total}) {
         </Typography>
 
 
-        <h2 className="infoBox__cases"><span className='infoBox__today'>today : </span>{cases}</h2>
+        <h2 className={`infoBox__cases ${!isRed && "infoBox__cases--green"}`}>
+          <span className='infoBox__today'>today : </span>
+          {cases}
+        </h2>
         
 
       </CardContent>

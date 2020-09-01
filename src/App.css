@@ -21,7 +21,16 @@ body {
   /* align items Horisentaly inside the div */
   align-items: center; 
     margin-bottom: 20px;
+}
+
+.app__header > h1 {
+  color: #fc3c3c;
+  font-size: 2rem;
 } 
+
+.app__dropdown {
+   background-color: #fff;
+}
 
 
 .app__left {
@@ -34,6 +43,9 @@ body {
   justify-content: space-between;
 }
 
+.app__right__Graph {
+  margin: 20px 0;
+}
 
 /* Media query  */
 @media (max-width: 990px) {
