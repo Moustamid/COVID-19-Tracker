@@ -13,10 +13,8 @@ import InfoBox from './components/InfoBox';
 import Map from './components/map';
 import Table from './components/table/Table';
 import {sortData} from './Helper/util';
+import LineGraph from './components/Graph/LineGraph';
 
-
-
-// Api link : https://disease.sh/v3/covid-19/jhucsse
 
 // USEEFFECT = Runs a piece of code based on a given condition  : 
     //  The code inside the USEEFFECT runs once ,
@@ -122,7 +120,8 @@ const onCountryChange = async e => {
          <CardContent>
            <h3>Live Cases by Country</h3>
            <Table countries={TableData} />
-           <h3>Wordwide new cases</h3>  
+           <h3>Wordwide new cases</h3> 
+            <LineGraph />
          </CardContent>
        </Card>
     </div>
